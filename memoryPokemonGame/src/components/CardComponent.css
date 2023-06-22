@@ -1,0 +1,17 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px black solid;
+  width: fit-content;
+  padding: 5px;
+}
+.imageContainer,
+h2 {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+h2 {
+  background-color: black;
+  color: white;
+}
