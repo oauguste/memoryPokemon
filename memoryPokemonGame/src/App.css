@@ -9,7 +9,8 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.cards {
+.cards,
+.removedPokemon {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;

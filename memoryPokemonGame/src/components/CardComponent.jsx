@@ -1,9 +1,9 @@
 import "./CardComponent.css";
 import PropTypes from "prop-types";
 
-const CardComponent = ({ img, name }) => {
+const CardComponent = ({ img, name, remove }) => {
   return (
-    <div className="cardContainer">
+    <div className="cardContainer" onClick={remove}>
       <div className="imageContainer">
         <img src={img} alt="" />
       </div>
@@ -19,5 +19,7 @@ const CardComponent = ({ img, name }) => {
 CardComponent.propTypes = {
   img: PropTypes.string.isRequired, // Add the missing prop type validation
   name: PropTypes.string.isRequired, // Add the missing prop type validation
+  remove: PropTypes.func.isRequired, // Add the missing prop type validation
+  // addName: PropTypes.func.isRequired, // Add the missing prop type validation
 };
 export default CardComponent;
