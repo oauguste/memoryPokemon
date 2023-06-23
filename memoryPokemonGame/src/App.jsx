@@ -7,7 +7,7 @@ import CardComponent from "./components/CardComponent";
 import { useEffect, useState } from "react";
 
 function App() {
-  // const [currentScore, setCurrentScore] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
   // const [bestScore, setBestScore] = useState([]);
   const [level, setLevel] = useState(2);
   const [cardNumber, setCardNumber] = useState(4);
@@ -16,11 +16,7 @@ function App() {
   const [name, setName] = useState([]);
   const [expectedOrder, setExpectedOrder] = useState(0);
   const [secondClone, setSecondClone] = useState([]);
-  const [clonedArray, setClonedArray] = useState([]);
-  const [second, setSecond] = useState([]);
   const [originalOrder, setOriginalOrder] = useState([]);
-
-  // const x = 10;
 
   useEffect(() => {
     const request = async () => {
@@ -129,9 +125,35 @@ function App() {
       const newImagesArray = secondClone.filter(
         (item) => item.name !== nameToRemove
       );
-      setSecondClone(newImagesArray);
+      scoring();
+      if (newImagesArray.length === 0) {
+        resetGame();
+      } else {
+        setSecondClone(newImagesArray);
+      }
     } else {
       console.log("Wrong order!");
+    }
+  };
+
+  //scoring
+  const resetGame = () => {
+    setCardNumber(cardNumber + 2); // Increase the card number by 2
+    setCurrentScore(0); // Reset current score
+    setImages([]);
+    setNewImages([]);
+    setName([]);
+    setExpectedOrder(0);
+    setOriginalOrder([]);
+    setSecondClone([]); // Reset the secondClone state
+  };
+
+  const scoring = () => {
+    setCurrentScore(currentScore + 1);
+  };
+  const increaseCardCount = () => {
+    if (currentScore === secondClone.length + 1) {
+      resetGame(); // Call resetGame if currentScore equals the length of secondClone
     }
   };
 
@@ -141,14 +163,14 @@ function App() {
         <Title />
       </div>
       <div className="score">
-        <CurrentScoreBtn />
+        <CurrentScoreBtn number={currentScore} />
         <Level />
         <BestScoreBtn />
       </div>
       <div className="cards">
         {images.map((image, index) => (
           <CardComponent
-            key={index}
+            key={image.name}
             img={image.pokemon}
             name={image.name}
             remove={() => {
@@ -161,11 +183,12 @@ function App() {
           {images.length === 0
             ? secondClone.map((image, index) => (
                 <CardComponent
-                  key={index}
+                  key={image.name}
                   img={image.pokemon}
                   name={image.name}
                   remove={() => {
                     removes(image.name);
+                    increaseCardCount();
                   }}
                 />
               ))
