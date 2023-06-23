@@ -93,7 +93,11 @@ function App() {
     addNametoNewArray({
       name: nameToRemove,
       order: orderToKeep,
-    }); // Modify this line
+    });
+    setOriginalOrder((prevOrder) => [
+      ...prevOrder,
+      nameToRemove,
+    ]);
   };
 
   function shuffleArray(array) {
@@ -119,17 +123,15 @@ function App() {
     );
     if (
       imageIndex !== -1 &&
-      secondClone[imageIndex].order === expectedOrder
+      nameToRemove === originalOrder[expectedOrder]
     ) {
       setExpectedOrder(expectedOrder + 1);
       const newImagesArray = secondClone.filter(
         (item) => item.name !== nameToRemove
       );
-      setNewImages(newImagesArray);
+      setSecondClone(newImagesArray);
     } else {
-      // The user clicked the wrong image
       console.log("Wrong order!");
-      // Here you might want to reset the game or something
     }
   };
 
