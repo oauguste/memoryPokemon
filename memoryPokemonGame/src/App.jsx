@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   // const [bestScore, setBestScore] = useState([]);
-  const [level, setLevel] = useState(2);
+  // const [level, setLevel] = useState(2);
   const [cardNumber, setCardNumber] = useState(4);
   const [images, setImages] = useState([]);
   const [newImages, setNewImages] = useState([]);
@@ -181,7 +181,7 @@ function App() {
 
         <div className="removedPokemon">
           {images.length === 0
-            ? secondClone.map((image, index) => (
+            ? secondClone.map((image) => (
                 <CardComponent
                   key={image.name}
                   img={image.pokemon}
